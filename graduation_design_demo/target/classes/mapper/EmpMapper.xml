@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.neusoft.domain.Emp">
+    <select id="getEmp"  resultType = "com.neusoft.domain.Emp">
+        select * from Emp e where e.empid = 1
+    </select>
+
+    <select id="findAll" resultType="com.neusoft.domain.Emp">
+        select * from Emp
+    </select>
+
+    <select id="findById" resultType="com.neusoft.domain.Emp">
+         select * from Emp e where e.empid = 1
+    </select>
+
+    <insert id="insertEmp" parameterType="com.neusoft.domain.Emp">
+        insert into Emp (ename,logid) values(#{ename} ,#{logid})
+    </insert>
+
+    <update id="updateEmp" parameterType="com.neusoft.domain.Emp">
+        update Emp set ename = #{ename},logid=#{logid} where empid=#{empid}
+    </update>
+
+    <delete id="deleteEmp" parameterType="INT">
+        delete from Emp where empid=#{empid}
+    </delete>
+
+    <select id="likeSelect" resultType="com.neusoft.domain.Emp" parameterType="java.lang.String">
+        select * from Emp
+        <where>
+            <if test="#{aaa} != null" >
+                ename like '%${aaa}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="countSelect" resultType="INT">
+        select count(*) from Emp
+    </select>
+</mapper>
